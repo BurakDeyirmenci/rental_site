@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: rental_db
+      POSTGRES_USER: rental_user
+      POSTGRES_PASSWORD: rental_password
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: ./backend
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: rental_db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: rental_user
+      POSTGRES_PASSWORD: rental_password
+    volumes:
+      - ./backend:/code
+      - static_volume:/code/staticfiles
+      - media_volume:/code/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

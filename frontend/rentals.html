@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/tt_slideshow.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/customjs.js"></script>
+    <script type="text/javascript" src="js/tt_animation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Meta Description" />
+    <title>Rentals</title>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="js/totop.js"></script>
+    <script type="text/javascript" src="js/tt_animation.js"></script>
+    <script type="text/javascript" src="js/layout.js"></script>
+    <script type="text/javascript" src="js/contactform.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <style>
+        .filter-container {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-container select {
+            width: auto;
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body class="service" onload="layout()">
+    <div class="margin_collapsetop"></div>
+    <div id="ttr_page" class="container">
+        <div id="ttr_content_and_sidebar_container">
+            <div id="ttr_content">
+                <div id="ttr_html_content_margin" class="container-fluid">
+                    <div class="margin_collapsetop"></div>
+                    <div class="ttr_service_html_row1 row">
+                        <div class="col-12 mb-3">
+                            <div class="form-outline" data-mdb-input-init>
+                                <input type="search" id="searchrental" class="form-control" placeholder="Type query" aria-label="Search" />
+                            </div>
+                        </div>
+                        <div class="filter-container col-12 mb-3">
+                            <div class="form-group">
+                                <label for="rental-brand-filter">Filter by Brand:</label>
+                                <select id="rental-brand-filter" class="form-control">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rental-model-filter">Filter by Model:</label>
+                                <select id="rental-model-filter" class="form-control">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rental-category-filter">Filter by Category:</label>
+                                <select id="rental-category-filter" class="form-control">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="my-rentals">
+                            <h3>Please Login....</h3>
+                        </div>
+                        <div class="visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+                    </div>
+                    <div class="modal fade" id="extendRentalModal" tabindex="-1" aria-labelledby="extendRentalModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="extendRentalModalLabel">Extend Rental</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="extend-rental-form">
+                                        <input type="hidden" id="extend-rental-id">
+                                        <div class="form-group">
+                                            <label for="extend-end-date">New End Date</label>
+                                            <input type="datetime-local" class="form-control" id="extend-end-date" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin_collapsetop"></div>
+                </div><!--content_margin-->
+            </div><!--content-->
+            <div style="clear:both"></div>
+        </div><!--container-->
+    </div><!--page-->
+    <div class="margin_collapsetop"></div>
+    <div class="margin_collapsebottom"></div>
+</body>
+
+</html>

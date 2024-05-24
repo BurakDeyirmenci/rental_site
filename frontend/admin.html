@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/tt_slideshow.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/customjs.js"></script>
+    <script type="text/javascript" src="js/tt_animation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Meta Description" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="js/totop.js"></script>
+    <script type="text/javascript" src="js/tt_animation.js"></script>
+    <script type="text/javascript" src="js/layout.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <style>
+        .filter-container {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-container select {
+            width: auto;
+            flex: 1;
+        }
+    </style>
+</head>
+<body onload="layout()">
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <div id="product-management">
+            <h2>Product Management</h2>
+            <button id="create-product" class="btn btn-primary">Create Product</button>
+            <!-- Filtreleme için select elemanları ekleyin -->
+            <div class="filter-container col-12">
+                <div class="form-group">
+                    <label for="brand-filter">Filter by Brand:</label>
+                    <select id="brand-filter" class="form-control">
+                        <option value="">All</option>
+                        <!-- Marka seçenekleri dinamik olarak buraya eklenecek -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model-filter">Filter by Model:</label>
+                    <select id="model-filter" class="form-control">
+                        <option value="">All</option>
+                        <!-- Model seçenekleri dinamik olarak buraya eklenecek -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="category-filter">Filter by Category:</label>
+                    <select id="category-filter" class="form-control">
+                        <option value="">All</option>
+                        <!-- Kategori seçenekleri dinamik olarak buraya eklenecek -->
+                    </select>
+                </div>
+            </div>
+            <table id="product-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Weight</th>
+                        <th>Category</th>
+                        <th>Image URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Products will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <div id="rental-management">
+            <h2>Rental Management</h2>
+            <div class="filter-container col-12">
+                <div class="form-group">
+                    <label for="user-filter">Filter by User:</label>
+                    <select id="user-filter" class="form-control">
+                        <option value="">All</option>
+                        <!-- Marka seçenekleri dinamik olarak buraya eklenecek -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-filter">Filter by Product:</label>
+                    <select id="product-filter" class="form-control">
+                        <option value="">All</option>
+                        <!-- Model seçenekleri dinamik olarak buraya eklenecek -->
+                    </select>
+                </div>
+            </div>
+            <table id="rental-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Product Name</th>
+                        <th>Username</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rentals will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Create/Update Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="product-form">
+                        <input type="hidden" id="product-id">
+                        <div class="form-group">
+                            <label for="product-name">Name</label>
+                            <input type="text" class="form-control" id="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-description">Description</label>
+                            <textarea class="form-control" id="product-description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-price">Price</label>
+                            <input type="number" class="form-control" id="product-price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-brand">Brand</label>
+                            <select class="form-control" id="product-brand" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-model">Model</label>
+                            <select class="form-control" id="product-model" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-weight">Weight</label>
+                            <input type="number" class="form-control" id="product-weight" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-category">Category</label>
+                            <select class="form-control" id="product-category" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-image">Image URL</label>
+                            <input type="url" class="form-control" id="product-image" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update/Delete Rental Modal -->
+    <div class="modal fade" id="rentalModal" tabindex="-1" aria-labelledby="rentalModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rentalModalLabel">Rental</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="rental-form">
+                        <input type="hidden" id="rental-id">
+                        <div class="form-group">
+                            <label for="rental-date">Rental Date</label>
+                            <input type="datetime-local" class="form-control" id="rental-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="return-date">Return Date</label>
+                            <input type="datetime-local" class="form-control" id="return-date" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/admin.js"></script>
+</body>
+</html>
