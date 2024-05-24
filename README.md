@@ -54,13 +54,6 @@ The backend is built with Django and includes the following features:
 - **Docker Compose:** The `docker-compose.yml` file configures the services.
 - **Nginx:** The `frontend/nginx.conf` file contains the Nginx configuration for serving the frontend.
 
-## Running Tests
-
-To run tests for the backend, use the following command:
-
-```bash
-docker-compose exec web python manage.py test
-```
 
 ## License
 
