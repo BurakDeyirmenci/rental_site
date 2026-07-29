@@ -74,13 +74,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'rental.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rental_db',
-        'USER': 'rental_user',
-        'PASSWORD': 'rental_password',
-        'HOST': 'db',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_DB", "rental_db"),
+        "USER": os.environ.get("POSTGRES_USER", "rental_user"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST", "db"),
+        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
 }
 
