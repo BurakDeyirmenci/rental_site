@@ -1,4 +1,4 @@
-const API_URL = "https://api.burakdeyirmenci.com";
+const API_URL = "https://api.burakdeyirmenci.com/api";
 const TOKEN = localStorage.getItem('token');
 
 function checkAdmin() {
