@@ -1,6 +1,5 @@
 # Base image
-FROM python:3.9
-
+FROM python:3.11
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
